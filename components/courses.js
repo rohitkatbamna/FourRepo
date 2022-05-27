@@ -1,62 +1,58 @@
 import react from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { DataTable } from "react-native-paper";
 
 function Courses({ courses }) {
 	console.log(courses);
 	return (
-		<ScrollView horizontal={true}>
-			<DataTable>
-				<DataTable.Header style={styles.tableHeader}>
-					<DataTable.Title style={styles.cell_course}>
-						Course Code
-					</DataTable.Title>
-					<DataTable.Title style={styles.cell_coursename}>
-						Course Name
-					</DataTable.Title>
-					<DataTable.Title style={styles.cell_credit}>
-						Course Credit
-					</DataTable.Title>
-					<DataTable.Title style={styles.cell_grade}>Grade</DataTable.Title>
-				</DataTable.Header>
-				{courses.map((obj) => {
-					return (
-						<DataTable.Row style={styles.cell_credit}>
-							<DataTable.Cell style={styles.cell_course}>
-								{obj.course_code}
-							</DataTable.Cell>
-							<DataTable.Cell style={styles.cell_coursename}>
-								{obj.course_name}
-							</DataTable.Cell>
-							<DataTable.Cell style={styles.cell_credit}>
-								{obj.course_credits}
-							</DataTable.Cell>
-							<DataTable.Cell style={styles.cell_grade}>
-								{obj.course_grade}
-							</DataTable.Cell>
-						</DataTable.Row>
-					);
-				})}
-			</DataTable>
-		</ScrollView>
+		<>
+			<View style={styles.header_table}>
+				<Text style={styles.cell_course_code}>Course Code</Text>
+				<Text style={styles.cell_coursename}>Course Name</Text>
+				<Text style={styles.cell_credit}>Course Credit</Text>
+				<Text style={styles.cell_grade}>Course grade</Text>
+			</View>
+
+			{courses.map((obj, index) => {
+				return (
+					<View style={styles.table_rows} key={index}>
+						<Text style={styles.cell_course_code}>{obj.course_code}</Text>
+						<Text style={styles.cell_coursename}>{obj.course_name}</Text>
+						<Text style={styles.cell_credit}> {obj.course_credits}</Text>
+						<Text style={styles.cell_grade}>{obj.course_grade}</Text>
+					</View>
+				);
+			})}
+		</>
 	);
 }
 export default Courses;
 const styles = StyleSheet.create({
-	tableHeader: {
+	header_table: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		borderWidth: 1,
 		backgroundColor: "lightblue",
+		margin: 5,
 	},
-	cell_course: {
-		flex: 2,
+	table_rows: {
+		flexDirection: "row",
+		margin: 5,
+	},
+	cell_course_code: {
+		flex: 0.4,
 	},
 	cell_coursename: {
-		flex: 5,
+		flex: 0.6,
+		flexWrap: "wrap",
+		margin: 5,
 	},
 	cell_credit: {
-		justifyContent: "center",
-		flex: 2,
+		flex: 0.4,
+		textAlign: "center",
 	},
 	cell_grade: {
-		flex: 1,
+		flex: 0.5,
+		textAlign: "center",
 	},
 });
